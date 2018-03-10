@@ -3,6 +3,7 @@
 
 #include <time.h>
 #include <DbgHelp.h>
+#include "MemoryMgr.h"
 
 #define INCLUDE_MESSAGEBOX 0
 
@@ -90,7 +91,10 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 {
 	if ( ul_reason_for_call == DLL_PROCESS_ATTACH )
 	{
-		AddVectoredExceptionHandler(1, CustomUnhandledExceptionFilter);
+		SetUnhandledExceptionFilter(CustomUnhandledExceptionFilter);
+
+		// Now stub out CustomUnhandledExceptionFilter so NO ONE ELSE can set it!
+		Memory::VP::Patch( &SetUnhandledExceptionFilter, { 0xC2, 0x04, 0x00 } );
 	}
 
 	return TRUE;
