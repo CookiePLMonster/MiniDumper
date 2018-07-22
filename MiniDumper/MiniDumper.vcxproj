@@ -82,6 +82,9 @@
   <ItemGroup>
     <ClInclude Include="MemoryMgr.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MiniDumper.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
